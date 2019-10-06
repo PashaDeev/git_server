@@ -7,7 +7,7 @@ function routWrapper(rootDir) {
     debug(`repository staff start`);
     const { repositoryId, commitHash, pathFromUrl } = req.params;
     const dir = path.join(rootDir, `${repositoryId}.git`);
-    const innerPath = pathFromUrl ? `./${pathFromUrl}/${req.params[0] || `.`}` : `.`;
+    const innerPath = pathFromUrl ? `./${pathFromUrl}${req.params[0] + '/' || `.`}` : `.`;
     const hash = commitHash || `master`;
     const result = await getStaff(dir, hash, innerPath);
     await res.json(result);

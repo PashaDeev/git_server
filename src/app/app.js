@@ -16,8 +16,8 @@ console.log(`-------------------------`);
 const app = express();
 
 app.get(`/`, async (req, res) => {
-  const fileData = await fs.readFile(path.join(__dirname, `views/main/index.html`));
-  res.end(fileData);
+  // const fileData = await fs.readFile(path.join(__dirname, `views/main/index.html`));
+  res.json({text: 'fi'});
 });
 
 app.use(bodyParser.urlencoded({

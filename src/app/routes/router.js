@@ -13,11 +13,11 @@ const { getBlob } = require(`./getBlob`);
 function mainRout(dir) {
   const rootDir = dir;
 
-  router.get(`/`, main(rootDir));
-
   router.post(`/:repositoryId`, create(rootDir));
 
   router.delete(`/:repositoryId`, deleteRepository(rootDir));
+
+  router.get(`/`, main(rootDir));
 
   router.get(`/:repositoryId/commits/:commitHash`, getCommits(rootDir));
 
