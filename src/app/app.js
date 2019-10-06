@@ -9,7 +9,7 @@ programm.option(`-d, --dir <name>`, 'dir for git repos')
 
 programm.parse(process.argv);
 
-const ROOT_DIR = programm.dir || path.join(__dirname, '..', '..', `..`, `resolve_git`);
+const ROOT_DIR = programm.dir || path.join(__dirname, '..', '..', `git_repo_tester`);
 console.log(`-------------------------`);
 console.log(`root`, ROOT_DIR);
 console.log(`-------------------------`);
