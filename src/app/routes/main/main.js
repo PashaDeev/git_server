@@ -1,7 +1,5 @@
-const util = require(`util`);
 const path = require(`path`);
 const fs = require(`fs-extra`);
-const childProcess = require(`child_process`);
 const { err: errorDebug } = require(`../../debug`);
 
 async function main(rootDir) {
