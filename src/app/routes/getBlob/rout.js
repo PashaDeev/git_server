@@ -1,6 +1,8 @@
 const debug = require(`debug`)(`router: `);
 const path = require(`path`);
 const getBlob = require(`./getBlob`);
+const pump = require('pump');
+const Transform = require(`stream`).Transform;
 
 function routWrapper(rootDir) {
   return async function(req, res) {
@@ -13,13 +15,10 @@ function routWrapper(rootDir) {
 
     await res.setHeader("Content-Type", "application/json");
     await res.setHeader("Transfer-Encoding", "chunked");
-    let promiseResolve;
-    new Promise(res => (promiseResolve = res));
-    const result = await getBlob(dir, hash, innerPath, res, promiseResolve);
+    const [stdout, parser] = await getBlob(dir, hash, innerPath);
 
-    if (result) {
-      await res.json(result);
-    }
+    pump(stdout, parser, res);
+
     debug(`get blob end`);
   };
 }

@@ -1,11 +1,11 @@
 const util = require(`util`);
 const { spawn } = require(`child_process`);
-const Transform = require(`stream`).Transform;
 const pump = require(`pump`);
+const Transform = require(`stream`).Transform;
 const { err: errorDebug } = require(`../../debug`);
 
 // const spawn = util.promisify(childProcess.spawn);
-async function getBlob(dir, hash, innerPath, response) {
+async function getBlob(dir, hash, innerPath) {
   const parser = new Transform();
   parser._transform = function(data, encoding, done) {
     const res = data
@@ -22,23 +22,20 @@ async function getBlob(dir, hash, innerPath, response) {
     done();
   };
   parser._flush = function(done) {
-    this.push(`${JSON.stringify({ raw: "" })}`);
+    this.push('{"raw": ""}]}');
     done();
   };
+  console.log('-------------------------');
+  console.log('dir', dir);
+  console.log('inner', innerPath);
+  console.log('-------------------------');
   try {
-    response.write(`{ "code": 200, "msg": [ `);
+    parser.push(`{ "code": 200, "msg": [ `);
     const childProcess = spawn(`git`, [`show`, `${hash}:${innerPath}`], {
       cwd: dir
     });
-    pump(childProcess.stdout, parser, response);
-    childProcess.stdout.on(`end`, () => {
-      response.write(`]}`);
-    });
-    childProcess.stderr.on(`error`, err => {
-      console.log(`-------------------------`);
-      console.log(`err`, err);
-      console.log(`-------------------------`);
-    });
+    return [childProcess.stdout, parser];
+    // pump(childProcess.stdout, parser);
   } catch (err) {
     if (err.code === `ENOENT`) {
       errorDebug(`no directory`);
@@ -52,8 +49,6 @@ async function getBlob(dir, hash, innerPath, response) {
     errorDebug(err);
     return { code: 500, msg: `err` };
   }
-  return false;
-  // return { code: 200, msg: res.stdout.trim() };
 }
 
 module.exports = getBlob;
