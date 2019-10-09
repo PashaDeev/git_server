@@ -1,10 +1,11 @@
 import express from 'express';
 import main from './main/rout.ts';
 import create from './create/rout.ts';
+import deleteRepository from './delete/rout.ts';
 
 const router = express.Router();
 
-const { deleteRepository } = require('./delete');
+// const { deleteRepository } = require('./delete');
 const { getCommits } = require('./commits');
 const { getCommitDiff } = require('./commitDiff');
 const { getStaff } = require('./getRepositoryStaff');

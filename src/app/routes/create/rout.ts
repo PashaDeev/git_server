@@ -11,8 +11,7 @@ export default function createRepository(rootDir: string) {
     const { repositoryId } = req.params;
     const { body } = req;
     if (!repositoryId || !body || !body.url) {
-      res.statusCode = 400;
-      return res.status(404).end('repository not exist');
+      return res.status(400).end();
     }
     const pathToDir = `${path.join(rootDir, repositoryId)}`;
     try {
