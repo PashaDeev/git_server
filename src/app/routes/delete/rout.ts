@@ -17,7 +17,7 @@ export default function routWrapper(rootDir: string) {
       debug('data: success');
       res.end();
     } catch (err) {
-      debug('data: success');
+      debug('data: error');
       next(err);
     }
   };
