@@ -1,9 +1,14 @@
+import debugInit from "debug";
+
 const express = require(`express`);
 const programm = require(`commander`);
 const fs = require(`fs-extra`);
 const path = require(`path`);
+const debugInit = require('debug');
 const bodyParser = require("body-parser");
 const { router } = require(`./routes`);
+
+const errorDebug = debugInit('err: ');
 
 programm.option(`-d, --dir <name>`, 'dir for git repos')
 
@@ -27,5 +32,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(`/api/repos`, router(ROOT_DIR));
+
+app.use((err, request, response, next) => {
+  errorDebug(err);
+  response.status(500).send('')
+});
+
 
 module.exports = app;
