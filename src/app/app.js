@@ -4,7 +4,6 @@ const express = require(`express`);
 const programm = require(`commander`);
 const fs = require(`fs-extra`);
 const path = require(`path`);
-const debugInit = require('debug');
 const bodyParser = require("body-parser");
 const { router } = require(`./routes`);
 
