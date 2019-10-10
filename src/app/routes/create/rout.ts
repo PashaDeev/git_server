@@ -13,9 +13,9 @@ export default function createRepository(rootDir: string) {
     if (!repositoryId || !body || !body.url) {
       return res.status(400).end();
     }
-    const pathToDir = `${path.join(rootDir, repositoryId)}`;
+
     try {
-      await create(pathToDir, body.url, rootDir);
+      await create(repositoryId, body.url, rootDir);
       debug('data: success');
       res.end();
     } catch (err) {

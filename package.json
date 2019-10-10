@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "cross-env DEBUG='server:*, rout:*, err:*' ts-node-dev --respawn --transpileOnly ./src/server.js",
+    "dev": "cross-env DEBUG='server:*, rout:*, err:*, app:*' ts-node-dev --respawn --transpileOnly src/server.ts",
     "start": "tsc && node ./build/server.js",
     "lint": "eslint ./",
     "test": "mocha test"

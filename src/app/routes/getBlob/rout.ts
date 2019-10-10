@@ -3,14 +3,9 @@ import initDebug from 'debug';
 import { join } from 'path';
 import getBlob from './getBlob';
 import pump from 'pump';
+import myErr from '../utils/Error';
 
 const debug = initDebug('rout: ');
-
-const myErr = class extends Error {
-  set code(code: string) {
-    this.code = code;
-  }
-}
 
 export default function routWrapper(rootDir: string) {
   return async function(req: Request, res: Response, next: NextFunction) {

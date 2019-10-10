@@ -1,15 +1,15 @@
 import express from 'express';
-import main from './main/rout.ts';
-import create from './create/rout.ts';
-import deleteRepository from './delete/rout.ts';
-import getCommits from './commits/rout.ts';
-import getCommitDiff from './commitDiff/rout.ts';
-import getStaff from './getRepositoryStaff/rout.ts';
-import getBlob from './getBlob/rout.ts';
+import main from './main/rout';
+import create from './create/rout';
+import deleteRepository from './delete/rout';
+import getCommits from './commits/rout';
+import getCommitDiff from './commitDiff/rout';
+import getStaff from './getRepositoryStaff/rout';
+import getBlob from './getBlob/rout';
 
 const router = express.Router();
 
-function mainRout(dir) {
+export default function mainRout(dir: string) {
   const rootDir = dir;
 
   router.post('/:repositoryId', create(rootDir));
@@ -28,5 +28,3 @@ function mainRout(dir) {
 
   return router;
 }
-
-module.exports = { router: mainRout };

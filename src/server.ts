@@ -1,7 +1,8 @@
-const http = require(`http`);
-const debug = require(`debug`)("server: ");
+import app from './app/app';
+import http from 'http';
+import debugInit from 'debug';
 
-const { app } = require(`./app`);
+const debug = debugInit('server: ');
 
 const server = http.createServer(app);
 
