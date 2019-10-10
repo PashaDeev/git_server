@@ -11,8 +11,8 @@ export default function routWrapper(rootDir: string) {
     debug(`GET get commit diff ${req.route.path}`);
     const { repositoryId, commitHash } = req.params;
 
-    await res.setHeader("Content-Type", "application/json");
-    await res.setHeader("Transfer-Encoding", "chunked");
+    await res.setHeader('Content-Type', 'application/json');
+    await res.setHeader('Transfer-Encoding', 'chunked');
 
     const [childProcess, parser] = getCommitDiff(join(rootDir, repositoryId), commitHash);
 
