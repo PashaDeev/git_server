@@ -4,6 +4,7 @@ import programm from 'commander';
 import { join } from 'path';
 import bodyParser from 'body-parser';
 import MyErr from './routes/utils/Error';
+import { readFileSync } from 'fs-extra';
 
 import router from './routes/router';
 
@@ -20,7 +21,8 @@ debugApp(`root dir ${ROOT_DIR}`);
 const app = express();
 
 app.get(`/`, async (req, res) => {
-  res.end('Hello!');
+  const index = readFileSync(join(__dirname, 'views', 'main', 'index.html'));
+  res.end(index);
 });
 
 app.use(
