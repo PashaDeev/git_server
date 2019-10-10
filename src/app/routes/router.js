@@ -3,11 +3,10 @@ import main from './main/rout.ts';
 import create from './create/rout.ts';
 import deleteRepository from './delete/rout.ts';
 import getCommits from './commits/rout.ts';
+import getCommitDiff from './commitDiff/rout.ts';
 
 const router = express.Router();
 
-// const { getCommits } = require('./commits');
-const { getCommitDiff } = require('./commitDiff');
 const { getStaff } = require('./getRepositoryStaff');
 const { getBlob } = require('./getBlob');
 
