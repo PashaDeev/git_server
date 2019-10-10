@@ -1,19 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
-import debugInit from 'debug';
+import initDebug from 'debug';
 import { join } from 'path';
-import getCommits from './commits';
+import getStaff from './getStaff';
 
-const debug = debugInit('rout: ');
+const debug = initDebug('rout: ');
 
 const ENOENT = 'ENOENT';
 
 export default function routWrapper(rootDir: string) {
   return async function(req: Request, res: Response, next: NextFunction) {
-    debug(`GET get commits ${req.route.path}`);
-    const { repositoryId, commitHash } = req.params;
-    const { start, count } = req.query;
+    debug(`GET get repository staff ${req.route.path}`);
+
+    const { repositoryId, commitHash, pathFromUrl } = req.params;
+    const dir = join(rootDir, repositoryId);
+    const innerPath = pathFromUrl ? `./${pathFromUrl}${req.params[0] + '/' || `.`}` : `.`;
+    const hash = commitHash || `master`;
+
     try {
-      const result = await getCommits(join(rootDir, repositoryId), commitHash, start, count);
+      const result = await getStaff(dir, hash, innerPath);
+
       debug(`data: __no more than 10__ > ${JSON.stringify(result.slice(0, 10))}`);
       await res.json({ msg: result });
     } catch (err) {
