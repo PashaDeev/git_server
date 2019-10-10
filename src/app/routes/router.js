@@ -5,10 +5,9 @@ import deleteRepository from './delete/rout.ts';
 import getCommits from './commits/rout.ts';
 import getCommitDiff from './commitDiff/rout.ts';
 import getStaff from './getRepositoryStaff/rout.ts';
+import getBlob from './getBlob/rout.ts';
 
 const router = express.Router();
-
-const { getBlob } = require('./getBlob');
 
 function mainRout(dir) {
   const rootDir = dir;
