@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env DEBUG='server:*, router:*, err:*'  nodemon src/server.js",
-    "start": "cross-env DEBUG='server:*, err:*', node src/server.js ",
+    "start": "cross-env DEBUG='server:*, router:*, err:*', node src/server.js ",
     "test": "mocha test"
   },
   "keywords": [],
