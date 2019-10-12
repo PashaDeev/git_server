@@ -15,7 +15,7 @@ programm.option(`-d, --dir <name>`, 'dir for git repos');
 
 programm.parse(process.argv);
 
-const ROOT_DIR = programm.dir || join(__dirname, '..', '..', `git_repo_tester`);
+const ROOT_DIR = programm.dir || join(__dirname, '..', '..', '..', 'git_repo_tester');
 debugApp(`root dir ${ROOT_DIR}`);
 
 const app = express();

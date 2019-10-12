@@ -20,7 +20,11 @@ export default function createRepository(rootDir: string) {
       res.end();
     } catch (err) {
       debug('data: error');
-      next(err);
+      if (err._code === 'ENOENT') {
+        res.end();
+      } else {
+        next(err);
+      }
     }
   };
 }
